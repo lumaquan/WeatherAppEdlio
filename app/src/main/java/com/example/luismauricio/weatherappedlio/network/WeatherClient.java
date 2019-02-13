@@ -12,12 +12,12 @@ import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class WeatherClient {
+class WeatherClient {
 
     private static WeatherApi INSTANCE;
     private static final Object lock = new Object();
 
-    public static WeatherApi getWeatherService() {
+    static WeatherApi getWeatherService() {
         if (INSTANCE == null) {
             synchronized (lock) {
                 INSTANCE = new Retrofit.Builder()
@@ -49,4 +49,5 @@ public class WeatherClient {
             return chain.proceed(request);
         }
     }
+
 }
