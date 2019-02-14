@@ -1,25 +1,18 @@
 package com.example.luismauricio.weatherappedlio.view;
 
-import android.arch.lifecycle.Observer;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.example.luismauricio.weatherappedlio.R;
-import com.example.luismauricio.weatherappedlio.data.WeatherRepository;
-import com.example.luismauricio.weatherappedlio.model.WeatherResponse;
-import com.example.luismauricio.weatherappedlio.network.WeatherSource;
 
-public class Main extends AppCompatActivity {
+public class Main extends AppCompatActivity implements AddCityDialog.AddCityListener {
 
     private static final String TAG = "3.1416";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +20,10 @@ public class Main extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show());
-
+        fab.setOnClickListener(view -> {
+            new AddCityDialog(this).show(getSupportFragmentManager(), "add_city");
+        });
     }
 
     @Override
@@ -54,5 +46,11 @@ public class Main extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onCityAdded(String city) {
+        MainFragment mainFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
+        mainFragment.addCity(city);
     }
 }

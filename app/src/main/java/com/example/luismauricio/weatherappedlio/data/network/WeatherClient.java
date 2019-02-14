@@ -1,4 +1,4 @@
-package com.example.luismauricio.weatherappedlio.network;
+package com.example.luismauricio.weatherappedlio.data.network;
 
 import android.support.annotation.NonNull;
 

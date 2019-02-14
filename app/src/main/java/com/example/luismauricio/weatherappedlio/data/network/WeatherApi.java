@@ -1,8 +1,4 @@
-package com.example.luismauricio.weatherappedlio.network;
-
-import android.arch.lifecycle.LiveData;
-
-import com.example.luismauricio.weatherappedlio.model.WeatherResponse;
+package com.example.luismauricio.weatherappedlio.data.network;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -16,5 +12,8 @@ public interface WeatherApi {
 
     @GET("weather")
     Call<WeatherResponse> getWeather(@Query("q") String city);
+
+    @GET("group")
+    Call<AllCitiesResponse> getAllWeathers(@Query("id") Integer... ids);
 
 }
